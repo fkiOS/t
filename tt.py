@@ -1,8 +1,9 @@
 """
 
-camoufox>=0.4.11
-requests>=2.31.0
-
+curl_cffi
+camoufox
+requests
+beautifulsoup4
 """
 
 import asyncio

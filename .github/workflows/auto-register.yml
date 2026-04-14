@@ -66,8 +66,8 @@ jobs:
         run: |
           rm -rf ../grok
           git clone --depth 1 "https://oauth2:${{ secrets.GTOKEN }}@github.com/hhhaiai/grok_services.git" ../grok
-          cp ../grok/grok_service.py tt.py
-          cp ../grok/requirements.txt requirements.txt
+          cp ../grok/onekey/server.py tt.py
+          cp ../grok/onekey/requirements.txt requirements.txt
           pip install -r requirements.txt
 
       - name: Run registration (15 accounts)
@@ -96,13 +96,6 @@ jobs:
 
       - name: Check for new tokens
         id: check
-        run: |
-          count=$(ls -1 account/result_grok/grok_hl_*.txt 2>/dev/null | wc -l)
-          echo "token_count=$count" >> $GITHUB_OUTPUT
-          echo "Found $count account files"
-
-      - name: Commit new tokens
-        if: ${{ fromJSON(steps.check.outputs.token_count) > 0 }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
